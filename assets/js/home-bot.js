@@ -6,7 +6,7 @@ homeBot.message.add({
 }).then(function () {
   return homeBot.message.add({
     delay: 1500,
-    content: 'Have you ever heard about living a healthy lifestyle?'
+    content: 'Have you ever heard about the ways to live more of a healthy lifestyle?'
   });
 }).then(function () {
   return homeBot.message.add({
@@ -27,10 +27,10 @@ homeBot.message.add({
   return homeBot.action.button({
     delay: 2500,
     action: [{
-      text: 'Healthy Lifestyle!',
+      text: 'Lifestyle',
       value: 'history'
     }, {
-      text: 'Healthy Activities',
+      text: 'Activities',
       value: 'landing'
     }]
   });
@@ -145,10 +145,10 @@ var land = function () {
   return homeBot.action.button({
     delay: 2500,
     action: [{
-      text: 'Healthy Lifestyle!',
+      text: 'Lifestyle',
       value: 'history'
     }, {
-      text: 'Healthy Activities',
+      text: 'Activities',
       value: 'landing'
     }]
   });
