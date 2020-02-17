@@ -8,4 +8,4 @@ permalink: /about/
 
 We are the Digital Society School and you can find us through social accounts below or via email.
 
-Feel free to contact us on email [rafailiasim@gmail.com](mailto:rafailiasim@gmail.com).
+Feel free to contact us on email [simple@example.com](mailto:simple@example.com).
