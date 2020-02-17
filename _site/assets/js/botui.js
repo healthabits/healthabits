@@ -1,9 +1,9 @@
 /*
- * botui 0.3.4
+ * botui 0.3.9
  * A JS library to build the UI for your bot
  * https://botui.org
  *
- * Copyright 2017, Moin Uddin
+ * Copyright 2019, Moin Uddin
  * Released under the MIT license.
 */
 
@@ -38,7 +38,8 @@
     var _botApp, // current vue instance.
     _options = {
       debug: false,
-      fontawesome: true
+      fontawesome: true,
+      searchselect: true
     },
     _container, // the outermost Element. Needed to scroll to bottom, for now.
     _interface = {}, // methods returned by a BotUI() instance.
@@ -49,7 +50,8 @@
       link: /\[([^\[]+)\]\(([^\)]+)\)(\^?)/igm // [text](link) ^ can be added at end to set the target as 'blank'
     },
     _fontAwesome = 'https://use.fontawesome.com/ea731dcb6f.js',
-    _esPromisePollyfill = 'https://cdn.jsdelivr.net/es6-promise/4.1.0/es6-promise.min.js'; // mostly for IE
+    _esPromisePollyfill = 'https://cdn.jsdelivr.net/es6-promise/4.1.0/es6-promise.min.js', // mostly for IE
+    _searchselect =  "https://unpkg.com/vue-select@2.4.0/dist/vue-select.js";
 
     root.Vue = root.Vue || opts.vue;
 
@@ -60,7 +62,7 @@
       }
     }
 
-    if(!root.Promise && !Promise && !options.promise) {
+    if(!root.Promise && typeof Promise === "undefined" && !opts.promise) {
       loadScript(_esPromisePollyfill);
     }
 
@@ -99,7 +101,7 @@
     }
 
     var _botuiComponent = {
-      template: '<div class=\"botui botui-container\" v-botui-container><div class=\"botui-messages-container\"><div v-for=\"msg in messages\" class=\"botui-message\" :class=\"msg.cssClass\" v-botui-scroll><transition name=\"slide-fade\"><div v-if=\"msg.visible\" :class=\"[{human: msg.human, \'botui-message-content\': true}, msg.type]\"><span v-if=\"msg.type == \'text\'\" v-text=\"msg.content\" v-botui-markdown></span> <iframe v-if=\"msg.type == \'embed\'\" :src=\"msg.content\" frameborder=\"0\" allowfullscreen></iframe></div></transition><div v-if=\"msg.loading\" class=\"botui-message-content loading\"><i class=\"dot\"></i><i class=\"dot\"></i><i class=\"dot\"></i></div></div></div><div class=\"botui-actions-container\"><transition name=\"slide-fade\"><div v-if=\"action.show\" v-botui-scroll><form v-if=\"action.type == \'text\'\" class=\"botui-actions-text\" @submit.prevent=\"handle_action_text()\" :class=\"action.cssClass\"><i v-if=\"action.text.icon\" class=\"botui-icon botui-action-text-icon fa\" :class=\"\'fa-\' + action.text.icon\"></i> <input type=\"text\" ref=\"input\" :type=\"action.text.sub_type\" v-model=\"action.text.value\" class=\"botui-actions-text-input\" :placeholder=\"action.text.placeholder\" :size=\"action.text.size\" :value=\"action.text.value\" :class=\"action.text.cssClass\" required v-focus/> <button type=\"submit\" :class=\"{\'botui-actions-buttons-button\': !!action.text.button, \'botui-actions-text-submit\': !action.text.button}\"><i v-if=\"action.text.button && action.text.button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + action.text.button.icon\"></i> <span>{{(action.text.button && action.text.button.label) || \'Go\'}}</span></button></form><div v-if=\"action.type == \'button\'\" class=\"botui-actions-buttons\" :class=\"action.cssClass\"> <button type=\"button\" :class=\"button.cssClass\" class=\"botui-actions-buttons-button\" v-for=\"button in action.button.buttons\" @click=\"handle_action_button(button)\" autofocus><i v-if=\"button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + button.icon\"></i> {{button.text}}</button></div></div></transition></div></div>', // replaced by HTML template during build. see Gulpfile.js
+      template: '<div class=\"botui botui-container\" v-botui-container><div class=\"botui-messages-container\"><div v-for=\"msg in messages\" class=\"botui-message\" :class=\"msg.cssClass\" v-botui-scroll><transition name=\"slide-fade\"><div v-if=\"msg.visible\"><div v-if=\"msg.photo && !msg.loading\" :class=\"[\'profil\', \'profile\', {human: msg.human, \'agent\': !msg.human}]\"> <img :src=\"msg.photo\" :class=\"[{human: msg.human, \'agent\': !msg.human}]\"></div><div :class=\"[{human: msg.human, \'botui-message-content\': true}, msg.type]\"><span v-if=\"msg.type == \'text\'\" v-text=\"msg.content\" v-botui-markdown></span><span v-if=\"msg.type == \'html\'\" v-html=\"msg.content\"></span> <iframe v-if=\"msg.type == \'embed\'\" :src=\"msg.content\" frameborder=\"0\" allowfullscreen></iframe></div></div></transition><div v-if=\"msg.photo && msg.loading && !msg.human\" :class=\"[\'profil\', \'profile\', {human: msg.human, \'agent\': !msg.human}]\"> <img :src=\"msg.photo\" :class=\"[{human: msg.human, \'agent\': !msg.human}]\"></div><div v-if=\"msg.loading\" class=\"botui-message-content loading\"><i class=\"dot\"></i><i class=\"dot\"></i><i class=\"dot\"></i></div></div></div><div class=\"botui-actions-container\"><transition name=\"slide-fade\"><div v-if=\"action.show\" v-botui-scroll><form v-if=\"action.type == \'text\'\" class=\"botui-actions-text\" @submit.prevent=\"handle_action_text()\" :class=\"action.cssClass\"><i v-if=\"action.text.icon\" class=\"botui-icon botui-action-text-icon fa\" :class=\"\'fa-\' + action.text.icon\"></i> <input type=\"text\" ref=\"input\" :type=\"action.text.sub_type\" v-model=\"action.text.value\" class=\"botui-actions-text-input\" :placeholder=\"action.text.placeholder\" :size=\"action.text.size\" :value=\" action.text.value\" :class=\"action.text.cssClass\" required v-focus/> <button type=\"submit\" :class=\"{\'botui-actions-buttons-button\': !!action.text.button, \'botui-actions-text-submit\': !action.text.button}\"><i v-if=\"action.text.button && action.text.button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + action.text.button.icon\"></i> <span>{{(action.text.button && action.text.button.label) || \'Go\'}}</span></button></form><form v-if=\"action.type == \'select\'\" class=\"botui-actions-select\" @submit.prevent=\"handle_action_select()\" :class=\"action.cssClass\"><i v-if=\"action.select.icon\" class=\"botui-icon botui-action-select-icon fa\" :class=\"\'fa-\' + action.select.icon\"></i><v-select v-if=\"action.select.searchselect && !action.select.multipleselect\" v-model=\"action.select.value\" :value=\"action.select.value\" :placeholder=\"action.select.placeholder\" class=\"botui-actions-text-searchselect\" :label=\"action.select.label\" :options=\"action.select.options\"></v-select><v-select v-else-if=\"action.select.searchselect && action.select.multipleselect\" multiple v-model=\"action.select.value\" :value=\"action.select.value\" :placeholder=\"action.select.placeholder\" class=\"botui-actions-text-searchselect\" :label=\"action.select.label\" :options=\"action.select.options\"></v-select> <select v-else v-model=\"action.select.value\" class=\"botui-actions-text-select\" :placeholder=\"action.select.placeholder\" :size=\"action.select.size\" :class=\"action.select.cssClass\" required v-focus><option v-for=\"option in action.select.options\" :class=\"action.select.optionClass\" v-bind:value=\"option.value\" :disabled=\"(option.value == \'\')?true:false\" :selected=\"(action.select.value == option.value)?\'selected\':\'\'\"> {{ option.text }}</option></select> <button type=\"submit\" :class=\"{\'botui-actions-buttons-button\': !!action.select.button, \'botui-actions-select-submit\': !action.select.button}\"><i v-if=\"action.select.button && action.select.button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + action.select.button.icon\"></i> <span>{{(action.select.button && action.select.button.label) || \'Ok\'}}</span></button></form><div v-if=\"action.type == \'button\'\" class=\"botui-actions-buttons\" :class=\"action.cssClass\"> <button type=\"button\" :class=\"button.cssClass\" class=\"botui-actions-buttons-button\" v-botui-scroll v-for=\"button in action.button.buttons\" @click=\"handle_action_button(button)\"><i v-if=\"button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + button.icon\"></i> {{button.text}}</button></div><form v-if=\"action.type == \'buttontext\'\" class=\"botui-actions-text\" @submit.prevent=\"handle_action_text()\" :class=\"action.cssClass\"><i v-if=\"action.text.icon\" class=\"botui-icon botui-action-text-icon fa\" :class=\"\'fa-\' + action.text.icon\"></i> <input type=\"text\" ref=\"input\" :type=\"action.text.sub_type\" v-model=\"action.text.value\" class=\"botui-actions-text-input\" :placeholder=\"action.text.placeholder\" :size=\"action.text.size\" :value=\"action.text.value\" :class=\"action.text.cssClass\" required v-focus/> <button type=\"submit\" :class=\"{\'botui-actions-buttons-button\': !!action.text.button, \'botui-actions-text-submit\': !action.text.button}\"><i v-if=\"action.text.button && action.text.button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + action.text.button.icon\"></i> <span>{{(action.text.button && action.text.button.label) || \'Go\'}}</span></button><div class=\"botui-actions-buttons\" :class=\"action.cssClass\"> <button type=\"button\" :class=\"button.cssClass\" class=\"botui-actions-buttons-button\" v-for=\"button in action.button.buttons\" @click=\"handle_action_button(button)\" autofocus><i v-if=\"button.icon\" class=\"botui-icon botui-action-button-icon fa\" :class=\"\'fa-\' + button.icon\"></i> {{button.text}}</button></div></form></div></transition></div></div>', // replaced by HTML template during build. see Gulpfile.js
       data: function () {
         return {
           action: {
@@ -123,7 +125,16 @@
       },
     	methods: {
     		handle_action_button: function (button) {
+          for (var i = 0; i < this.action.button.buttons.length; i++) {
+            if(this.action.button.buttons[i].value == button.value && typeof(this.action.button.buttons[i].event) == 'function') {
+              this.action.button.buttons[i].event(button);
+              if (this.action.button.buttons[i].actionStop) return false;
+              break;
+            }
+          }
+
           _handleAction(button.text);
+
           var defaultActionObj = {
             type: 'button',
             text: button.text,
@@ -148,7 +159,48 @@
             value: this.action.text.value
           });
     			this.action.text.value = '';
-    		}
+    		},
+        handle_action_select: function () {
+          if(this.action.select.searchselect && !this.action.select.multipleselect) {
+            if(!this.action.select.value.value) return;
+            _handleAction(this.action.select.value[this.action.select.label]);
+            _actionResolve({
+              type: 'text',
+              value: this.action.select.value.value,
+              text: this.action.select.value.text,
+              obj: this.action.select.value
+            });
+          }
+          if(this.action.select.searchselect && this.action.select.multipleselect) {
+            if(!this.action.select.value) return;
+            var values = new Array();
+            var labels = new Array();
+            for (var i = 0; i < this.action.select.value.length; i++) {
+              values.push(this.action.select.value[i].value);
+              labels.push(this.action.select.value[i][this.action.select.label]);
+            }
+            _handleAction(labels.join(', '));
+            _actionResolve({
+              type: 'text',
+              value: values.join(', '),
+              text: labels.join(', '),
+              obj: this.action.select.value
+            });
+          }
+          else {
+            if(!this.action.select.value) return;
+            for (var i = 0; i < this.action.select.options.length; i++) { // Find select title
+              if (this.action.select.options[i].value == this.action.select.value) {
+                _handleAction(this.action.select.options[i].text);
+                _actionResolve({
+                  type: 'text',
+                  value: this.action.select.value,
+                  text: this.action.select.options[i].text
+                });
+              }
+            }
+          }
+        }
     	}
     };
 
@@ -160,6 +212,7 @@
     root.Vue.directive('botui-scroll', {
       inserted: function (el) {
         _container.scrollTop = _container.scrollHeight;
+	el.scrollIntoView(true);
       }
     });
 
@@ -258,7 +311,7 @@
     }
 
     function _checkAction(_opts) {
-      if(!_opts.action) {
+      if(!_opts.action && !_opts.actionButton  && !_opts.actionText) {
         throw Error('BotUI: "action" property is required.');
       }
     }
@@ -303,11 +356,56 @@
         _opts.type = 'button';
         _instance.action.button.buttons = _opts.action;
         return _showActions(_opts);
+      },
+      select: function (_opts) {
+        _checkAction(_opts);
+        _opts.type = 'select';
+        _opts.action.label = _opts.action.label || 'text';
+        _opts.action.value = _opts.action.value || '';
+        _opts.action.searchselect = typeof _opts.action.searchselect !== 'undefined' ? _opts.action.searchselect : _options.searchselect;
+        _opts.action.multipleselect = _opts.action.multipleselect || false;
+        if (_opts.action.searchselect && typeof(_opts.action.value) == 'string') {
+          if (!_opts.action.multipleselect) {
+            for (var i = 0; i < _opts.action.options.length; i++) { // Find object
+              if (_opts.action.options[i].value == _opts.action.value) {
+                _opts.action.value = _opts.action.options[i]
+              }
+            }
+          }
+          else {
+            var vals = _opts.action.value.split(',');
+            _opts.action.value = new Array();
+            for (var i = 0; i < _opts.action.options.length; i++) { // Find object
+              for (var j = 0; j < vals.length; j++) { // Search values
+                if (_opts.action.options[i].value == vals[j]) {
+                  _opts.action.value.push(_opts.action.options[i]);
+                }
+              }
+            }
+          }
+        }
+        if (!_opts.action.searchselect) { _opts.action.options.unshift({value:'',text : _opts.action.placeholder}); }
+        _instance.action.button = _opts.action.button;
+        _instance.action.select = _opts.action;
+        return _showActions(_opts);
+      },
+      buttontext: function (_opts) {
+        _checkAction(_opts);
+        _opts.type = 'buttontext';
+        _instance.action.button.buttons = _opts.actionButton;
+        _instance.action.text = _opts.actionText;
+        return _showActions(_opts);
       }
     };
 
     if(_options.fontawesome) {
       loadScript(_fontAwesome);
+    }
+
+    if(_options.searchselect) {
+      loadScript(_searchselect, function() {
+        Vue.component('v-select', VueSelect.VueSelect);
+      });
     }
 
     if(_options.debug) {
