@@ -71,17 +71,28 @@ homeBot.message.add({
   selections[1] = res.value;
   localStorage.setItem("gender", res.value);
   var js = JSON.stringify(selections) ;
-	
-	$.post( 'https://voice-app.000webhostapp.com/database.php', {'x':js} ).done(function( data ) {
-    console.log( "Data Loaded: " + data );  
-	    
-	})
-  .fail(function() {
-    //alert( "Δεν υπάρχει σύνδεση στο ίντερνετ." );
-  alert( 'No internet connection!\n');
+	 
+$.ajax({
+  type: "POST",
+  dataType: 'jsonp',
+  crossDomain: true,
+  //headers: {  'Access-Control-Allow-Origin': '*' },
+  url: "http://voice-app.000webhostapp.com/database.php",
   
-  });
+  data: js,
+  success: 
+    $.post( 'http://voice-app.000webhostapp.com/database.php', {'x':js} ).done(function( data ) {
+        console.log( "Data Loaded: " + data );  
+          
+      })
+      .fail(function() {
+       
+        alert( 'No internet connection!\n');
+      
+      })
+  
+  
+});
+	
 });
 
- 
-  
