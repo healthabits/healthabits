@@ -4,3 +4,7 @@
 ![HealthApp Theme](/assets/img/ezgif.com-video-to-gif.gif)
 
 HealthApp uses **jekyll theme** based on minima theme and integrates the javascript [BotUI](https://github.com/botui/botui) framework, designed to create landing pages with conversational layouts.
+
+## Usage
+
+Use [Github Desktop](https://desktop.github.com). Clone this repository using your github account make changes and push them to the master branch.
