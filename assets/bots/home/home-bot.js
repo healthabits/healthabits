@@ -77,11 +77,11 @@ $.ajax({
   dataType: 'jsonp',
   crossDomain: true,
   //headers: {  'Access-Control-Allow-Origin': '*' },
-  url: "http://voice-app.000webhostapp.com/database.php",
+  url: "https://voice-app.000webhostapp.com/database.php",
   
   data: js,
   success: 
-    $.post( 'http://voice-app.000webhostapp.com/database.php', {'x':js} ).done(function( data ) {
+    $.post( 'https://voice-app.000webhostapp.com/database.php', {'x':js} ).done(function( data ) {
         console.log( "Data Loaded: " + data );  
           
       })
