@@ -7,4 +7,5 @@ HealthApp uses **jekyll theme** based on minima theme and integrates the javascr
 
 ## Usage
 
-Use [Github Desktop](https://desktop.github.com). Clone this repository using your github account make changes and push them to the master branch.
+ - Use [Github Desktop](https://desktop.github.com). 
+ - Clone this repository using your github account make changes and push them to the master branch.
