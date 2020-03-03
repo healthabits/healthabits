@@ -429,7 +429,7 @@ var results = function () {
     
     }
     // TECH SKEPTIC
-    if ((selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) ) {
+    if (analyze(selections[3]<= 0) && (selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) ) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
