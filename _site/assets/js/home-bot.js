@@ -176,7 +176,7 @@ homeBot.message.add({
       });
     }
     
-    if(analyze((res2.value).toString()) <= 0 || text.includes("unlikely") || text.includes("not likely")){
+    if(analyze((res2.value).toString()) <= 0 || text.includes("unlikely") || text.includes("not likely") || text.includes("not very likely") ){
       return homeBot.message.add({
         delay: 1500,
         content: 'Will you please describe the reason behind this choice?'
@@ -343,31 +343,220 @@ homeBot.message.add({
 
 var results = function () {
   
-    //document.getElementById('home-demo').innerHTML = document.getElementById('profile').innerHTML;
-    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely") && (selections[7] == "healthy" || selections[7] == 'less healthy') && analyze(selections[3]) >0 && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[9]) >0 ) {
-      //document.getElementById('home-demo').innerHTML = document.getElementById('profile').innerHTML;
+   // LIFE CONSCIOUS
+    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely" || selections[5]=="very") && (selections[7] == "healthy" || selections[7] == 'less healthy') && analyze(selections[3]) >0 && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[9]) >0 ) {
+      
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
       var node = document.getElementById('profile');
       var x = document.createElement("IMG");
       x.setAttribute("src", "/assets/img/Persona2.png");
-      x.setAttribute("width", "100%");
-      x.setAttribute("height", "100%");
+      x.setAttribute("display", "block");
+
+      x.setAttribute("width", "50%");
+      x.setAttribute("margin-left", "auto");
+      x.setAttribute("margin-right", "auto");
+
       x.setAttribute("alt", "The Life Conscious");
       document.body.appendChild(x);
+      
+      var g = document.createElement("H1");
+      var s = document.createTextNode("Life Conscious");
+      g.appendChild(s);
+      document.body.appendChild(g);
+      var h = document.createElement("LI");                
+      var t = document.createTextNode("Conscious about lifestyle");
+      var k = document.createElement("LI");   
+      var m = document.createTextNode("Satisfied with app");
+      var r = document.createElement("LI");
+      var w = document.createTextNode("Trusts easily technology");
+      var l = document.createElement("LI");   
+      var n= document.createTextNode("Find apps useful");     // Create a text node
+      h.appendChild(t); k.appendChild(m); l.appendChild(n);
+      document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+      //var r = document.createElement("p");
+      //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
+      r.appendChild(w);
+      document.body.appendChild(r);
+      document.getElementById("profile").appendChild(g);
+      document.getElementById("profile").appendChild(h);
+      document.getElementById("profile").appendChild(k);
+      document.getElementById("profile").appendChild(l);
+      document.getElementById("profile").appendChild(r);
+      document.getElementById('profile').appendChild(x);
+   }
+   // LIFE AND TECH CONSCIOUS
+    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely" || selections[5]=="very") && (selections[7] == "healthy" || selections[7] == 'less healthy') && ( ( selections[4].includes("data") || selections[4].includes("privacy")) ) && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[0])>0) {
+      
+      document.getElementById("home-demo").style.display="none"; 
+      document.getElementById('profile').style.display="block";
+      var node = document.getElementById('profile');
+      var x = document.createElement("IMG");
+      x.setAttribute("src", "/assets/img/Persona1.png");
+      x.setAttribute("display", "block");
+
+      x.setAttribute("width", "50%");
+      x.setAttribute("margin-left", "auto");
+      x.setAttribute("margin-right", "auto");
+
+      x.setAttribute("alt", "The Life and Tech Conscious");
+      document.body.appendChild(x);
+      
+      var g = document.createElement("H1");
+      var s = document.createTextNode("Life and Tech Conscious");
+      g.appendChild(s);
+      document.body.appendChild(g);
+      var h = document.createElement("LI");                
+      var t = document.createTextNode("Conscious about life");
+      var k = document.createElement("LI");   
+      var m = document.createTextNode("Conscious about tech");
+      var r = document.createElement("LI");
+      var w = document.createTextNode("Conscious about apps");
+      var l = document.createElement("LI");   
+      var n= document.createTextNode("Lives a healthy life already");     // Create a text node
+      h.appendChild(t); k.appendChild(m); l.appendChild(n);
+      document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+      //var r = document.createElement("p");
+      //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
+      r.appendChild(w);
+      document.body.appendChild(r);
+      document.getElementById("profile").appendChild(g);
+      document.getElementById("profile").appendChild(h);
+      document.getElementById("profile").appendChild(k);
+      document.getElementById("profile").appendChild(l);
+      document.getElementById("profile").appendChild(r);
       document.getElementById('profile').appendChild(x);
     
     }
-    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely") && (selections[7] == "healthy" || selections[7] == 'less healthy') && (analyze(selections[3]) <=0 && ( selections[4].includes("data") || selections[4].includes("privacy")) ) && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[0])>0) {
+    // TECH SKEPTIC
+    if ((selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) ) {
       
-      var x = document.getElementById("profile");
-      x.setAttribute("src", "/assets/img/Persona1.png");
-      x.setAttribute("width", "100%");
-      x.setAttribute("height", "100%");
-      x.setAttribute("alt", "The Life and Tech Conscious");
+      document.getElementById("home-demo").style.display="none"; 
+      document.getElementById('profile').style.display="block";
+      var node = document.getElementById('profile');
+      var x = document.createElement("IMG");
+      x.setAttribute("src", "/assets/img/Persona5.png");
+      x.setAttribute("display", "block");
+
+      x.setAttribute("width", "50%");
+      x.setAttribute("margin-left", "auto");
+      x.setAttribute("margin-right", "auto");
+
+      x.setAttribute("alt", "The Tech Skeptic");
       document.body.appendChild(x);
+      
+      var g = document.createElement("H1");
+      var s = document.createTextNode("Tech Skeptic");
+      g.appendChild(s);
+      document.body.appendChild(g);
+      var h = document.createElement("LI");                
+      var t = document.createTextNode("A Dinosaur type person do not use any health app.");
+      var k = document.createElement("LI");   
+      var m = document.createTextNode("Might be health conscious (diet, sport)");
+      var r = document.createElement("LI");
+      var w = document.createTextNode("Want to change unhealthy behaviours to live healthier ");
+      var l = document.createElement("LI");   
+      var n= document.createTextNode("Believes in traditional values");     
+      h.appendChild(t); k.appendChild(m); l.appendChild(n);
+      document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+      //var r = document.createElement("p");
+      //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
+      r.appendChild(w);
+      document.body.appendChild(r);
+      document.getElementById("profile").appendChild(g);
+      document.getElementById("profile").appendChild(h);
+      document.getElementById("profile").appendChild(k);
+      document.getElementById("profile").appendChild(l);
+      document.getElementById("profile").appendChild(r);
+      document.getElementById('profile').appendChild(x);
     
     }
+        // IGNORANT
+        if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && analyze(selections[0]) <= 0 && analyze(selections[9])<=0 ) {
+      
+          document.getElementById("home-demo").style.display="none"; 
+      document.getElementById('profile').style.display="block";
+      var node = document.getElementById('profile');
+      var x = document.createElement("IMG");
+          x.setAttribute("src", "/assets/img/Persona4.png");
+          x.setAttribute("display", "block");
+    
+          x.setAttribute("width", "50%");
+          x.setAttribute("margin-left", "auto");
+          x.setAttribute("margin-right", "auto");
+    
+          x.setAttribute("alt", "The Sloth");
+          document.body.appendChild(x);
+          
+          var g = document.createElement("H1");
+          var s = document.createTextNode("The Sloth");
+          g.appendChild(s);
+          document.body.appendChild(g);
+          var h = document.createElement("LI");                
+          var t = document.createTextNode("Sloth type person is indifferent regarding to food habits.");
+          var k = document.createElement("LI");   
+          var m = document.createTextNode("Does not live health consciously (diet)");
+          var r = document.createElement("LI");
+          var w = document.createTextNode("Does not use health apps");
+          var l = document.createElement("LI");   
+          var n= document.createTextNode("He/She is careless");     
+          h.appendChild(t); k.appendChild(m); l.appendChild(n);
+          document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+          //var r = document.createElement("p");
+          //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
+          r.appendChild(w);
+          document.body.appendChild(r);
+          document.getElementById("profile").appendChild(g);
+          document.getElementById("profile").appendChild(h);
+          document.getElementById("profile").appendChild(k);
+          document.getElementById("profile").appendChild(l);
+          document.getElementById("profile").appendChild(r);
+          document.getElementById('profile').appendChild(x);
+        
+        }
+          // BLOCKED
+          if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && (selections[8] =="light activities" || selections[8] == "maybe in the future") || analyze(selections[9])<=0  ) {
+      
+            document.getElementById("home-demo").style.display="none"; 
+      document.getElementById('profile').style.display="block";
+      var node = document.getElementById('profile');
+      var x = document.createElement("IMG");
+            x.setAttribute("src", "/assets/img/Persona3.png");
+            x.setAttribute("display", "block");
+      
+            x.setAttribute("width", "50%");
+            x.setAttribute("margin-left", "auto");
+            x.setAttribute("margin-right", "auto");
+      
+            x.setAttribute("alt", "The Sloth");
+            document.body.appendChild(x);
+            
+            var g = document.createElement("H1");
+            var s = document.createTextNode("The Sloth");
+            g.appendChild(s);
+            document.body.appendChild(g);
+            var h = document.createElement("LI");                
+            var t = document.createTextNode("Sloth type person is indifferent regarding to food habits.");
+            var k = document.createElement("LI");   
+            var m = document.createTextNode("Does not live health consciously (diet)");
+            var r = document.createElement("LI");
+            var w = document.createTextNode("Does not use health apps");
+            var l = document.createElement("LI");   
+            var n= document.createTextNode("He/She is careless");     
+            h.appendChild(t); k.appendChild(m); l.appendChild(n);
+            document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+            //var r = document.createElement("p");
+            //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
+            r.appendChild(w);
+            document.body.appendChild(r);
+            document.getElementById("profile").appendChild(g);
+            document.getElementById("profile").appendChild(h);
+            document.getElementById("profile").appendChild(k);
+            document.getElementById("profile").appendChild(l);
+            document.getElementById("profile").appendChild(r);
+            document.getElementById('profile').appendChild(x);
+          
+          }
 }
 
           var repeat = function () {
@@ -545,7 +734,7 @@ var results = function () {
                   });
                 }
                 
-                if(analyze((res2.value).toString()) <= 0 || text.includes("unlikely") || text.includes("not likely")){
+                if(analyze((res2.value).toString()) <= 0 || text.includes("unlikely") || text.includes("not likely") || text.includes("not very likely")){
                   return homeBot.message.add({
                     delay: 1500,
                     content: 'Will you please describe the reason behind this choice?'
