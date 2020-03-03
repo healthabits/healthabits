@@ -27,13 +27,16 @@
 <link rel="manifest" href="/manifest.json">
 <meta name="msapplication-TileImage" content="/assets/img/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-  <title>About</title>
+  <title>Chat</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/assets/main.css">
    
   
-  
+  <script src = "/assets/js/scaledrone.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/chat.css">
+  <!--script src="http://twitterjs.googlecode.com/svn/trunk/src/twitter.min.js"></script-->
+
   <link rel="canonical" href="http://localhost:4000/about/">
   <link rel="alternate" type="application/rss+xml" title="Health App" href="/feed.xml">
   
@@ -63,7 +66,7 @@
           
         
           
-          <a class="page-link" href="/about/">About</a>
+          <a class="page-link" href="/about/">Chat</a>
           
         
           
@@ -89,15 +92,20 @@
         <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">About</h1>
+    <h1 class="post-title">Chat</h1>
   </header>
 
   <div class="post-content">
-    <p><img src="/assets/img/ezgif.com-video-to-gif.gif" alt="Hello there" /></p>
-
-<p>We are the Digital Society School and you can find us through social accounts below or via email.</p>
-
-<p>Feel free to contact us on email <a href="mailto:simple@example.com">simple@example.com</a>.</p>
+    <body>
+  <div class="members-count">-</div>
+  <div class="members-list">-</div>
+  <div class="messages"></div>
+  <form class="message-form" onsubmit="return false;">
+    <input class="message-form__input" placeholder="Type a message.." type="text" />
+    <input class="message-form__button" value="Send" type="submit" />
+  </form>
+  <script src="/assets/js/chat.js"></script>
+</body>
 
   </div>
 

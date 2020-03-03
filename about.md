@@ -1,11 +1,16 @@
 ---
 layout: page
-title: About
+title: Chat
 permalink: /about/
 ---
-
-![Hello there](/assets/img/ezgif.com-video-to-gif.gif)
-
-We are the Digital Society School and you can find us through social accounts below or via email.
-
-Feel free to contact us on email [simple@example.com](mailto:simple@example.com).
+  
+<body>
+  <div class="members-count">-</div>
+  <div class="members-list">-</div>
+  <div class="messages"></div>
+  <form class="message-form" onsubmit="return false;">
+    <input class="message-form__input" placeholder="Type a message.." type="text"/>
+    <input class="message-form__button" value="Send" type="submit"/>
+  </form>
+  <script src="{{ "/assets/js/chat.js" | relative_url }}"></script>
+</body>

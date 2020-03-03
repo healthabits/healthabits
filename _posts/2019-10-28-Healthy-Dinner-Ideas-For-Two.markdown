@@ -1,11 +1,9 @@
 ---
 layout: post
-title:  "Healthy Dinner Ideas For Two"
+title:  "Healthy Dinner Ideas "
 date:   2019-10-28 09:33:45 +0200
 categories: nutrition evidence based
 ---
-
-![Hello there](/assets/img/ezgif.com-video-to-gif.gif)
 
 
 It’s common to feel rushed at dinnertime and opt for easy options, such as fast food or frozen meals, even if you’re sharing a meal with just one other person — such as a partner, child, friend, or parent.
@@ -14,7 +12,7 @@ If you crave variety and want to spice up your routine, plenty of scrumptious, s
 
 Interestingly, home-cooked meals are associated with improved diet quality, and family meals lead to healthier diets and less weight gain in children and adolescents (1Trusted Source, 2Trusted Source).
 
-Here are 12 nutritious and scrumptious dinner ideas for two.
+Here are 2 nutritious and scrumptious dinner ideas for two.
 
 ### 1. Chicken-quinoa bowl
 
