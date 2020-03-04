@@ -445,7 +445,7 @@ var results = function () {
     
     }
     // TECH SKEPTIC
-    if ( (selections[7] != "unhealthy" ) && ((selections[8] != 'not at all')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[4].includes("watching") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy") || selections[6].includes("watching")) && analyze(selections[5])<=0 && (analyze(selections[3]) <=0 || analyze(selections[3])>0) && analyze(selections[0])<=0) {
+    if ( (selections[7] != "unhealthy" ) && ((selections[8] != 'not at all')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[4].includes("watching") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy") || selections[6].includes("watching")) && analyze(selections[5])<=0 && (analyze(selections[3]) <=0 || analyze(selections[3])>0)) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
