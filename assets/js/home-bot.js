@@ -360,7 +360,7 @@ homeBot.message.add({
 var results = function () {
   
    // LIFE CONSCIOUS
-    if ((analyze(selections[5])>0 || (selections[5].includes( "likely") || selections[5].includes("often") && !selections[5].includes("not"))) && (selections[7] != "unhealthy") && analyze(selections[3]) >0 && (selections[8] != 'not at all') && analyze(selections[9]) >0 ) {
+    if ((selections[7] == "healthy" || selections[7] == "less healthy") && analyze(selections[0])>0 && analyze(selections[3]) >0 && analyze(selections[9]) >0 ) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -402,7 +402,7 @@ var results = function () {
       document.getElementById('profile').appendChild(x);
    }
    // LIFE AND TECH CONSCIOUS
-    if ((analyze(selections[5])>0 || (selections[5].includes( "likely") || selections[5].includes("often") && !selections[5].includes("not"))) && (selections[7] != "unhealthy") && ( ( selections[4].includes("data") || selections[4].includes("privacy") || selections[4].includes("watching")) ) && (selections[8] != 'not at all') && analyze(selections[0])>0) {
+    if ((selections[7] == "healthy" || selections[7]=="less healthy") &&  analyze(selections[0])>0 && analyze(selections[9])>0) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -445,7 +445,7 @@ var results = function () {
     
     }
     // TECH SKEPTIC
-    if ( (selections[7] != "unhealthy" ) && ((selections[8] != 'not at all')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[4].includes("watching") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy") || selections[6].includes("watching")) && analyze(selections[5])<=0 && (analyze(selections[3]) <=0 || analyze(selections[3])>0)) {
+    if ( analyze(selections[0])<=0) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -488,7 +488,7 @@ var results = function () {
     
     }
         // IGNORANT
-        if ((selections[7] != "healthy") && analyze(selections[0]) <= 0 && (analyze(selections[9])<=0 || selections[6].includes("laziness") || selections[6].includes("boredom") || selections[10].includes("laziness") || selections[10].includes("boredom"))) {
+        if ((selections[7] != "healthy") && analyze(selections[0]) <= 0 && (analyze(selections[9])<=0 )) {
       
           document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -531,7 +531,7 @@ var results = function () {
         
         }
           // BLOCKED
-          if ((selections[7] != "healthy") && (selections[8] !="heavy activities") || analyze(selections[9])<=0  ) {
+          if ((selections[8] !="heavy activities") && (analyze(selections[9])<=0 || analyze(selections[9])>0) ) {
       
             document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -552,7 +552,7 @@ var results = function () {
             g.appendChild(s);
             document.body.appendChild(g);
             var h = document.createElement("LI");                
-            var t = document.createTextNode("The Penguin type person has strong cultural or social obstacles (they do not see others but penguins).");
+            var t = document.createTextNode("The Penguin type person has strong cultural or social obstacles.");
             var k = document.createElement("LI");   
             var m = document.createTextNode("Have motivation and willingness to change, but they can quickly lost interest.");
             var r = document.createElement("LI");
