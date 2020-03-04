@@ -402,7 +402,7 @@ var results = function () {
       document.getElementById('profile').appendChild(x);
    }
    // LIFE AND TECH CONSCIOUS
-    if (analyze(selections[3])<=0 && (selections[7] != "unhealthy"  && selections[7]=="mostly unhealthy") &&  analyze(selections[0])>0 && analyze(selections[9])>0) {
+    if (analyze(selections[3])< 0 && (selections[7] != "unhealthy"  && selections[7] !="mostly unhealthy") &&  analyze(selections[0])>0 && analyze(selections[9])>0) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -488,7 +488,7 @@ var results = function () {
     
     }
         // IGNORANT
-        if ((selections[7] != "healthy") && (selections[8]  != "light activities" && selections[8] != "heavy activities") && analyze(selections[0]) < 0 && (analyze(selections[9])<=0 )) {
+        if ((selections[7] != "healthy") && (selections[7] != "less healthy") && (selections[8]  != "light activities" && selections[8] != "heavy activities") && analyze(selections[0]) < 0 && (analyze(selections[9])<0 )) {
       
           document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
