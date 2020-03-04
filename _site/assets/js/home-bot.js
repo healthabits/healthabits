@@ -19,6 +19,11 @@ homeBot.message.add({
 }).then(function () {
   return homeBot.message.add({
     delay: 1500,
+    content: 'Please answer my questions so I can know more about you!'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
     content: 'Can I know your name?'
   });
 }).then(function () {
@@ -39,7 +44,7 @@ homeBot.message.add({
 }).then(function () {
   return homeBot.message.add({
     delay: 1500,
-    content: 'Do you use any health app?'
+    content: 'So, I was wondering do you use any health app? Health apps are application programs that offer health-related services (e.g. food habits, workout, medical conditions).'
   });
   questioncounter = 0;
 }).then(function () {
@@ -81,10 +86,26 @@ homeBot.message.add({
       content: 'What features do you like most in a health app?'
     })
   .then(function(){
-      return homeBot.action.text({ 
-        action: {
-          placeholder: 'Enter your text here'
-        }
+      return homeBot.action.button({ 
+        action: [{
+          text: 'ability to predict',
+          value: 'ability to predict'
+        }, {
+          text: 'goal setting',
+          value: 'goal setting'
+        },{
+          text: 'rewards',
+          value: 'rewards'
+        }, {
+          text: 'provide information',
+          value: 'information'
+        }, {
+          text: 'self monitoring',
+          value: 'self monitoring'
+        },{
+          text: 'community support',
+          value: 'community support'
+        }]
         });
   }).then(function (res3) {
       console.log(res3.value); 
@@ -110,7 +131,7 @@ homeBot.message.add({
   selections[3] = res.value;
   localStorage.setItem("useful_self_tracking_apps", res.value);
   var text = tokenize(res.value);
-  if(text.includes("data") || text.includes("privacy") || analyze((res.value).toString()) <= 0){
+  if(text.includes("data") || text.includes("privacy") || text.includes("trust") || analyze((res.value).toString()) <= 0){
     return homeBot.message.add({
       delay: 1500,
       content: 'Please tell me a lil bit more about your concerns?'
@@ -158,7 +179,7 @@ homeBot.message.add({
     selections[5] = res2.value;
     localStorage.setItem("likelihood_of_usage", res2.value);
     var text = tokenize(res2.value);
-    if(analyze((res2.value).toString()) > 0 || (text.includes("likely") || text.includes("often") || text.includes("very") && !text.includes("not"))){
+    if(analyze((res2.value).toString()) > 0 || (text.includes("likely") || text.includes("often") || text.includes("very") ) && !text.includes("not")){
       return homeBot.message.add({
         delay: 1500,
         content: 'If I am not asking too much, describe me within a few words how the system helps you feeling better?'
@@ -209,24 +230,19 @@ homeBot.message.add({
       action: [{
         
         text: 'mostly unhealthy',
-        value: 'mostly unhealthy',
-        icon: 'pizza-slice',
-        label: 'pizza'
+        value: 'mostly unhealthy'
       }, {
         
         text: 'less healthy',
-        value: 'less healthy',
-        icon: 'drumstick-bite'
+        value: 'less healthy'
       },{
        
         text: 'unhealthy',
-        value: 'unhealthy',
-        icon: 'hotdog'
+        value: 'unhealthy'
       }, {
         
         text: 'healthy',
-        value: 'healthy',
-        icon: 'fish'
+        value: 'healthy'
       }]
     });/*/
     /*return homeBot.message.add({
@@ -429,7 +445,7 @@ var results = function () {
     
     }
     // TECH SKEPTIC
-    if (analyze(selections[3]<= 0) && (selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) ) {
+    if ( (selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy") || analyze(selections[5])<=0) && (analyze(selections[3]) <=0 || analyze(selections[3])>0)) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -472,7 +488,7 @@ var results = function () {
     
     }
         // IGNORANT
-        if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && analyze(selections[0]) <= 0 && analyze(selections[9])<=0 ) {
+        if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && analyze(selections[0]) <= 0 && (analyze(selections[9])<=0 || selections[6].includes("laziness") || selections[6].includes("boredom") || selections[10].includes("laziness") || selections[10].includes("boredom"))) {
       
           document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -528,23 +544,23 @@ var results = function () {
             x.setAttribute("margin-left", "auto");
             x.setAttribute("margin-right", "auto");
       
-            x.setAttribute("alt", "The Sloth");
+            x.setAttribute("alt", "The Penguin");
             document.body.appendChild(x);
             
             var g = document.createElement("H1");
-            var s = document.createTextNode("The Sloth");
+            var s = document.createTextNode("The Penguin");
             g.appendChild(s);
             document.body.appendChild(g);
             var h = document.createElement("LI");                
-            var t = document.createTextNode("Sloth type person is indifferent regarding to food habits.");
+            var t = document.createTextNode("The Penguin type person has strong cultural or social obstacles (they do not see others but penguins).");
             var k = document.createElement("LI");   
-            var m = document.createTextNode("Does not live health consciously (diet)");
+            var m = document.createTextNode("Have motivation and willingness to change, but they can quickly lost interest.");
             var r = document.createElement("LI");
-            var w = document.createTextNode("Does not use health apps");
-            var l = document.createElement("LI");   
-            var n= document.createTextNode("He/She is careless");     
-            h.appendChild(t); k.appendChild(m); l.appendChild(n);
-            document.body.appendChild(h);document.body.appendChild(k);document.body.appendChild(l);
+            var w = document.createTextNode("Tries a lot of things");
+            //var l = document.createElement("LI");   
+            //var n= document.createTextNode("He/She is careless");     
+            h.appendChild(t); k.appendChild(m); //l.appendChild(n);
+            document.body.appendChild(h);document.body.appendChild(k);//document.body.appendChild(l);
             //var r = document.createElement("p");
             //var w = document.createTextNode("He/She has motivation and willingness to change, mostly eats healthy food and follows the flow (social). Because of lack of time he/she might lose motivation and willingness to improve his/her lifestyle");
             r.appendChild(w);
@@ -552,7 +568,7 @@ var results = function () {
             document.getElementById("profile").appendChild(g);
             document.getElementById("profile").appendChild(h);
             document.getElementById("profile").appendChild(k);
-            document.getElementById("profile").appendChild(l);
+            //document.getElementById("profile").appendChild(l);
             document.getElementById("profile").appendChild(r);
             document.getElementById('profile').appendChild(x);
           
@@ -577,6 +593,11 @@ var results = function () {
             }).then(function () {
               return homeBot.message.add({
                 delay: 1500,
+                content: 'Please answer my questions so I can know more about you!'
+              });
+            }).then(function () {
+              return homeBot.message.add({
+                delay: 1500,
                 content: 'Can I know your name?'
               });
             }).then(function () {
@@ -597,7 +618,7 @@ var results = function () {
             }).then(function () {
               return homeBot.message.add({
                 delay: 1500,
-                content: 'Do you use any health app?'
+                content: 'So, I was wondering do you use any health app? Health apps are application programs that offer health-related services (e.g. food habits, workout, medical conditions).'
               });
               questioncounter = 0;
             }).then(function () {
@@ -639,10 +660,26 @@ var results = function () {
                   content: 'What features do you like most in a health app?'
                 })
               .then(function(){
-                  return homeBot.action.text({ 
-                    action: {
-                      placeholder: 'Enter your text here'
-                    }
+                  return homeBot.action.button({ 
+                    action: [{
+                      text: 'ability to predict',
+                      value: 'ability to predict'
+                    }, {
+                      text: 'goal setting',
+                      value: 'goal setting'
+                    },{
+                      text: 'rewards',
+                      value: 'rewards'
+                    }, {
+                      text: 'provide information',
+                      value: 'information'
+                    }, {
+                      text: 'self monitoring',
+                      value: 'self monitoring'
+                    },{
+                      text: 'community support',
+                      value: 'community support'
+                    }]
                     });
               }).then(function (res3) {
                   console.log(res3.value); 
@@ -668,7 +705,7 @@ var results = function () {
               selections[3] = res.value;
               localStorage.setItem("useful_self_tracking_apps", res.value);
               var text = tokenize(res.value);
-              if(text.includes("data") || text.includes("privacy") || analyze((res.value).toString()) <= 0){
+              if(text.includes("data") || text.includes("privacy") || text.includes("trust") || analyze((res.value).toString()) <= 0){
                 return homeBot.message.add({
                   delay: 1500,
                   content: 'Please tell me a lil bit more about your concerns?'
@@ -716,7 +753,7 @@ var results = function () {
                 selections[5] = res2.value;
                 localStorage.setItem("likelihood_of_usage", res2.value);
                 var text = tokenize(res2.value);
-                if(analyze((res2.value).toString()) > 0 || (text.includes("likely") || text.includes("often") || text.includes("very") && !text.includes("not"))){
+                if(analyze((res2.value).toString()) > 0 || (text.includes("likely") || text.includes("often") || text.includes("very") ) && !text.includes("not")){
                   return homeBot.message.add({
                     delay: 1500,
                     content: 'If I am not asking too much, describe me within a few words how the system helps you feeling better?'
@@ -767,24 +804,19 @@ var results = function () {
                   action: [{
                     
                     text: 'mostly unhealthy',
-                    value: 'mostly unhealthy',
-                    icon: 'pizza-slice',
-                    label: 'pizza'
+                    value: 'mostly unhealthy'
                   }, {
                     
                     text: 'less healthy',
-                    value: 'less healthy',
-                    icon: 'drumstick-bite'
+                    value: 'less healthy'
                   },{
                    
                     text: 'unhealthy',
-                    value: 'unhealthy',
-                    icon: 'hotdog'
+                    value: 'unhealthy'
                   }, {
                     
                     text: 'healthy',
-                    value: 'healthy',
-                    icon: 'fish'
+                    value: 'healthy'
                   }]
                 });/*/
                 /*return homeBot.message.add({
