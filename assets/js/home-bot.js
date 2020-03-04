@@ -488,7 +488,7 @@ var results = function () {
     
     }
         // IGNORANT
-        if ((selections[7] != "healthy") && (selections[7] != "less healthy") && (selections[8]  != "light activities" && selections[8] != "heavy activities") && analyze(selections[0]) < 0 && (analyze(selections[9])<0 )) {
+        if ((selections[7] != "healthy") && (selections[7] != "less healthy")  && (analyze(selections[9]) < 0 )) {
       
           document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -531,7 +531,7 @@ var results = function () {
         
         }
           // BLOCKED
-          if (selections[7] != "healthy" && selections[7] != "less healthy" && (selections[8] !="heavy activities" && selections[8] != "light activities") && (analyze(selections[9])>0) ) {
+          if (selections[7] != "healthy" && selections[7] != "less healthy"  && (analyze(selections[9])>0) ) {
       
             document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
