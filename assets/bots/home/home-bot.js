@@ -360,7 +360,7 @@ homeBot.message.add({
 var results = function () {
   
    // LIFE CONSCIOUS
-    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely" || selections[5]=="very") && (selections[7] == "healthy" || selections[7] == 'less healthy') && analyze(selections[3]) >0 && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[9]) >0 ) {
+    if ((analyze(selections[5])>0 || (selections[5].includes( "likely") || selections[5].includes("often") && !selections[5].includes("not"))) && (selections[7] != "unhealthy") && analyze(selections[3]) >0 && (selections[8] != 'not at all') && analyze(selections[9]) >0 ) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -402,7 +402,7 @@ var results = function () {
       document.getElementById('profile').appendChild(x);
    }
    // LIFE AND TECH CONSCIOUS
-    if ((analyze(selections[5])>0 || selections[5] == "very likely" || selections[5] =="likely" || selections[5]=="very") && (selections[7] == "healthy" || selections[7] == 'less healthy') && ( ( selections[4].includes("data") || selections[4].includes("privacy")) ) && (selections[8] == 'light activities' || selections[8] == 'heavy activities') && analyze(selections[0])>0) {
+    if ((analyze(selections[5])>0 || (selections[5].includes( "likely") || selections[5].includes("often") && !selections[5].includes("not"))) && (selections[7] != "unhealthy") && ( ( selections[4].includes("data") || selections[4].includes("privacy")) ) && (selections[8] != 'not at all') && analyze(selections[0])>0) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -445,7 +445,7 @@ var results = function () {
     
     }
     // TECH SKEPTIC
-    if ( (selections[7] == "healthy" || selections[7] == 'less healthy') && ((selections[8] == 'light activities' || selections[8] == 'heavy activities')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy")) && analyze(selections[5])<=0 && (analyze(selections[3]) <=0 || analyze(selections[3])>0)) {
+    if ( (selections[7] != "unhealthy" ) && ((selections[8] != 'not at all')) && (selections[4].includes("concerns") || selections[4].includes("trust") || selections[4].includes("data") || selections[4].includes("privacy") || selections[6].includes("concerns") || selections[6].includes("trust") || selections[6].includes("data") || selections[6].includes("privacy")) && analyze(selections[5])<=0 && (analyze(selections[3]) <=0 || analyze(selections[3])>0)) {
       
       document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -488,7 +488,7 @@ var results = function () {
     
     }
         // IGNORANT
-        if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && analyze(selections[0]) <= 0 && (analyze(selections[9])<=0 || selections[6].includes("laziness") || selections[6].includes("boredom") || selections[10].includes("laziness") || selections[10].includes("boredom"))) {
+        if ((selections[7] != "healthy") && analyze(selections[0]) <= 0 && (analyze(selections[9])<=0 || selections[6].includes("laziness") || selections[6].includes("boredom") || selections[10].includes("laziness") || selections[10].includes("boredom"))) {
       
           document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
@@ -531,7 +531,7 @@ var results = function () {
         
         }
           // BLOCKED
-          if ((selections[7] == "mostly unhealthy" || selections[7] == 'unhealthy') && (selections[8] =="light activities" || selections[8] == "maybe in the future") || analyze(selections[9])<=0  ) {
+          if ((selections[7] != "healthy") && (selections[8] !="heavy activities") || analyze(selections[9])<=0  ) {
       
             document.getElementById("home-demo").style.display="none"; 
       document.getElementById('profile').style.display="block";
