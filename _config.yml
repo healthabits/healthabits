@@ -18,7 +18,7 @@ email: simple@example.com
 description: > # this means to ignore newlines until "baseurl:"
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://healthabits.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-author: Digital Society School
+author: Habits 4 Health
 twitter_username: 
 github_username:  healthabits
 
